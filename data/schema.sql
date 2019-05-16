@@ -13,7 +13,7 @@ CREATE TABLE books (
 
 
 INSERT INTO books (title, author, isbn, image_url, description, bookshelf)
-VALUES('Game', 'who', '2453433', 'https://sdkjngosg', 'thanos dies', 'End game');
+VALUES('Just So Stories', 'Kipling', '39015010350141', 'http://books.google.com/books/content?id=RwBbAAAAMAAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api', 'Twelve stories about animals and insects including How the Camel Got His Hump; How the First Letter was Written, and How the Rhinoceros Got His Skin.', 'End game');
 
 
 INSERT INTO books (title, author, isbn, image_url, description, bookshelf)

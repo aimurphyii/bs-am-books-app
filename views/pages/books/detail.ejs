@@ -1,25 +1,21 @@
+<section id="" class="book-container detail">
 
+  <img src=<%= book.image_url %> alt=Cover for <%= book.title %> />
+  <h2><%= book.title %></h2>
+  <h3><%= book.author %></h3>
+  <!-- you can class these for hiding -->
+  <p><%= book.description %></p>
+  <p>ISBN <%= book.isbn %></p>
+  <p>Bookshelf <%= book.bookshelf %></p>
 
-<section id="" class="book">
-  
-    <img src=<%= results.image_url %> alt=Cover for <%= results.title %> />
-    <h2><%= results.title %></h2>
-    <h3><%= results.author %></h3>
-    <p><%= results.description %></p>
-    <p>ISBN <%= results.isbn %></p>
-    <p>Bookshelf <%= results.bookshelf %></p>
-    
-          <form action="/searches/save_id" method="post" id="<%= results.isbn %>">
-            <input type="text" name="title" value="<%= results.title %>" />
-            <input type="text" name="author" value="<%= results.author %>" />
-            <input type="text" name="isbn" value="<%= results.isbn %>" />
-            <input type="textarea" name="description" value="<%= results.description %>" />
-            <input type="text" name="bookshelf" value="<%= results.bookshelf %>" />
-            <input type="text" name="image_url" value="<%= results.image_url %>" />
-            <button type="button" name="<%= results.isbn%>" >Update Details</button>
-            <button type="submit">Delete Book</button>
-          </form>
+  <form action="/searches/save_id" method="post" id="<%= book.isbn %>">
+    <input type="text" name="title" value="<%= book.title %>" />
+    <input type="text" name="author" value="<%= book.author %>" />
+    <input type="text" name="isbn" value="<%= book.isbn %>" />
+    <input type="textarea" name="description" value="<%= book.description %>" />
+    <input type="text" name="bookshelf" value="<%= book.bookshelf %>" />
+    <input type="text" name="image_url" value="<%= book.image_url %>" />
+    <button type="button" name="<%= book.isbn%>">Update Details</button>
+    <button type="submit">Delete Book</button>
+  </form>
 </section>
-
-
-    
