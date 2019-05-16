@@ -1,0 +1,48 @@
+<!-- index.ejs -->
+
+<!-- getBooksFromDb -->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <%- include('../layout/head') %>
+</head>
+
+<body>
+    <header>
+        <%- include('../layout/header') %>
+    </header>
+  <main>
+    
+    <ul class="subnav">
+        <li>
+          <i class="fas fa-search"></i>
+          <a href="/new">Search</a>
+        </li>
+        <li>
+            <i class="fas fa-book-open"></i>
+          <a href="/">Shelf</a>
+        </li>
+      </ul>
+    
+  <h1><%= results.length %> Saved Books</h1>
+  
+
+  <ul>
+    <% results.forEach(bookInfo => { %>
+      <div>
+      <li class="img left"><img src='<%= bookInfo.id %>' /></li>
+      <li class="title right"><%= bookInfo.title %></li>
+      <li class="author right"><%= bookInfo.author %></li>
+      <button class="right" type="button" onclick="location.href='/books/<%= bookInfo.id %>';">View Details</button>
+      </div>
+    <% }); %>
+
+  </ul>
+</main>
+<footer> 
+    <%- include('../layout/footer') %>
+</footer>
+</body>
+
+</html>

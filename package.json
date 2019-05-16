@@ -1,0 +1,32 @@
+{
+  "name": "books-app",
+  "version": "1.0.0",
+  "description": "google books API book catalogue",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aimurphyii/bs-am-books-app.git"
+  },
+  "keywords": [
+    "book",
+    "app"
+  ],
+  "author": "Brad and Ai",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aimurphyii/bs-am-books-app/issues"
+  },
+  "homepage": "https://github.com/aimurphyii/bs-am-books-app#readme",
+  "dependencies": {
+    "dotenv": "^8.0.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "method-override": "^3.0.0",
+    "pg": "^7.11.0",
+    "superagent": "^5.0.5"
+  }
+}

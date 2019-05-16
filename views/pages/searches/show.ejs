@@ -1,0 +1,63 @@
+<!-- pages/searches/show  -->
+
+<!-- New search for 10 books -->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <%- include('../../layout/head') %>
+</head>
+
+<body>
+    <header>
+        <%- include('../../layout/header') %>
+    </header>
+  <main>
+    
+
+    <ul class="subnav">
+        <li>
+          <i class="fas fa-search"></i>
+          <a href="/new">Search</a>
+        </li>
+        <li>
+            <i class="fas fa-book-open"></i>
+          <a href="/">Shelf</a>
+        </li>
+      </ul>
+      
+  <h1><%= searchResults.length %> Book Results</h1>
+
+  <ul>
+
+    <% searchResults.forEach(volumeInfo => { %>
+  <div>
+    <li class="img"><img src='<%= volumeInfo.imageLinks %>' /></li>
+    <li class="title"><h4><%= volumeInfo.title %></h4></li>
+    <li class="author"><%= volumeInfo.authors %></li>
+    <li class="description"><%= volumeInfo.description %></li>
+    <button type="button" name="<%= volumeInfo.identifier%>" >Select this Book</button>
+          <form action="/searches/save_id" method="post" id="<%= volumeInfo.identifier %>">
+            <input type="text" name="title" value="<%= volumeInfo.title %>" />
+            <input type="text" name="author" value="<%= volumeInfo.authors %>" />
+            <input type="textarea" name="description" value="<%= volumeInfo.description %>" />
+            <input type="text" name="isbn" value="<%= volumeInfo.identifier %>" />
+            <input type="text" name="bookshelf" value="<%= volumeInfo.bookshelf %>" />
+            <button type="submit">Save to Database</button>
+          </form>
+
+  </div>
+    <% }); %>
+
+  </ul>
+</main>
+<footer> 
+    <%- include('../../layout/footer') %>
+</footer>
+
+
+</body>
+
+</html>
+
+

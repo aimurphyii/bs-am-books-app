@@ -1,0 +1,72 @@
+*{
+  box-sizing: border-box;
+}
+
+body{
+  /* font-family: 'Neucha', cursive; */
+  font-family: 'Inconsolata', monospace;
+  text-align: center;
+  background: url(https://images.unsplash.com/photo-1485322551133-3a4c27a9d925?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80
+  );
+  background-attachment: fixed;
+}
+
+header, footer{
+  font-family: 'Neucha', cursive;
+  text-transform: uppercase;
+  /* font-family: 'Amatic SC', cursive; */
+  color:white;
+  background: #273043;
+  padding: 20px;
+  width:100%;
+}
+
+h1{
+  font-family: 'Neucha', cursive;
+  padding: 20px;
+  font-size: 25px;
+}
+
+h2, h3, h4{
+  font-family: 'Neucha', cursive;
+  text-transform: uppercase;
+  background:#5CAB7D;
+  line-height: 1.2em;
+}
+
+a{
+  font-family: 'Inconsolata', monospace;
+  text-decoration: none;
+  color:#9DB4C0;
+}
+
+a:hover{
+  text-transform: unset;
+  font-weight: bolder;
+  font-size: 1.1em;
+  color: #D7DAE5;
+}
+
+a:active{
+  text-decoration: underline;
+}
+
+button {
+  border: none;
+  border-radius: 5px;
+  background: #5CAB7D;
+  color: #fff;
+  padding: 8px 20px;
+  transition: 350ms all;
+  cursor: grab;
+}
+
+button:hover {
+  background: #F4AC45;
+  color: #273043;
+}
+
+.fas{
+  font-size: 25px;
+  color: white;
+}

@@ -1,0 +1,25 @@
+
+
+<section id="" class="book">
+  
+    <img src=<%= results.image_url %> alt=Cover for <%= results.title %> />
+    <h2><%= results.title %></h2>
+    <h3><%= results.author %></h3>
+    <p><%= results.description %></p>
+    <p>ISBN <%= results.isbn %></p>
+    <p>Bookshelf <%= results.bookshelf %></p>
+    
+          <form action="/searches/save_id" method="post" id="<%= results.isbn %>">
+            <input type="text" name="title" value="<%= results.title %>" />
+            <input type="text" name="author" value="<%= results.author %>" />
+            <input type="text" name="isbn" value="<%= results.isbn %>" />
+            <input type="textarea" name="description" value="<%= results.description %>" />
+            <input type="text" name="bookshelf" value="<%= results.bookshelf %>" />
+            <input type="text" name="image_url" value="<%= results.image_url %>" />
+            <button type="button" name="<%= results.isbn%>" >Update Details</button>
+            <button type="submit">Delete Book</button>
+          </form>
+</section>
+
+
+    

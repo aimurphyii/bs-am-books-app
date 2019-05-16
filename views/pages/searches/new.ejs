@@ -1,0 +1,62 @@
+<!-- pages/searches/new   search form -->
+
+<!-- search form -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../../layout/head') %>
+
+</head>
+
+<body>
+  <header>
+    <%- include('../../layout/header') %>
+  </header>
+
+  <!-- main body starts here-->
+  <main>
+    <!-- sub navigation -->
+    <ul class="subnav">
+      <li>
+        <i class="fas fa-search"></i>
+        <a href="/new">Search</a>
+      </li>
+      <li>
+          <i class="fas fa-book-open"></i>
+        <a href="/">Shelf</a>
+      </li>
+    </ul>
+    <!-- end subnav -->
+
+    <!-- Search form area -->
+    <form action="/searches" method="post">
+      <section class="searchbar">
+        <input type="text" name="search" placeholder="favorite title or author" required>
+        <button type="submit">
+          <i class="fab fa-google"></i>
+        </button>
+      </section>
+
+      <section class="radiobuttons">
+        <fieldset>
+          <label for="title">
+            <span>Title</span>
+            <input type="radio" name="search" value="title" required>
+          </label>
+        </fieldset>
+        <fieldset>
+          <label for="author">
+            <span>Author</span>
+            <input type="radio" name="search" value="author" required>
+          </label>
+        </fieldset>
+      </section>
+    </form>
+  </main>
+  <footer>
+    <%- include('../../layout/footer') %>
+  </footer>
+</body>
+
+</html>
