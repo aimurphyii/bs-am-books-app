@@ -1,0 +1,43 @@
+<!-- books/show -->
+
+<!-- view details of one book from db -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <%- include('../../layout/head') %>
+</head>
+
+<body>
+    <header>
+        <%- include('../../layout/header') %>
+    </header>
+  <main>
+      <ul class="subnav">
+          <li>
+            <i class="fas fa-search"></i>
+            <a href="/new">Search</a>
+          </li>
+          <li>
+              <i class="fas fa-book-open"></i>
+            <a href="/">Shelf</a>
+          </li>
+        </ul>
+      <ul>
+          <li>
+            <%- include('detail', {results: results}) %>
+          </li>
+        </ul>
+  </main>
+<footer> 
+    <%- include('../../layout/footer') %>
+</footer>
+</body>
+
+</html>
+
+
+
+
+

@@ -1,0 +1,47 @@
+<!-- index.ejs -->
+<!-- getBooksFromDb -->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <%- include('../layout/head') %>
+</head>
+
+<body>
+  <header>
+    <%- include('../layout/header') %>
+  </header>
+  <main>
+
+    <ul class="subnav">
+      <li>
+        <i class="fas fa-search"></i>
+        <a href="/searches/new">Search</a>
+      </li>
+      <li>
+        <i class="fas fa-book-open"></i>
+        <a href="/">Shelf</a>
+      </li>
+    </ul>
+
+    <h1><%= books.length %> Saved Books</h1>
+
+    <ul>
+      <% books.forEach(book => { %>
+      <div>
+        <li class="book-items" data-book-id="<%=book.id%>">
+          <%-include('books/detail',{book:book})%>
+        </li>
+
+        <p class="details"><a href="/books/<%=book.id%>">View Details</a></p>
+      </div>
+      <% }); %>
+
+    </ul>
+  </main>
+  <footer>
+    <%- include('../layout/footer') %>
+  </footer>
+</body>
+
+</html>

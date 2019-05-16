@@ -1,0 +1,63 @@
+<!-- pages/searches/show  -->
+
+<!-- New search for 10 books -->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <%- include('../../layout/head') %>
+</head>
+
+<body>
+  <header>
+    <%- include('../../layout/header') %>
+  </header>
+  <main>
+
+
+    <ul class="subnav">
+      <li>
+        <i class="fas fa-search"></i>
+        <a href="/searches/new">Search</a>
+      </li>
+      <li>
+        <i class="fas fa-book-open"></i>
+        <a href="/">Shelf</a>
+      </li>
+    </ul>
+
+    <h1><%= results.length %> Book Results</h1>
+
+    <ul>
+
+      <% results.forEach(book => { %>
+      <div>
+        <li class="img"><img src='<%= book.image_url %>' /></li>
+        <li class="title">
+          <h4><%= book.title %></h4>
+        </li>
+        <li class="author"><%= book.authors %></li>
+        <li class="description"><%= book.description %></li>
+        <button type="button" name="<%= book.identifier%>">Select this Book</button>
+        <form action="/searches/save_id" method="post" id="<%= book.identifier %>">
+          <input type="text" name="title" value="<%= book.title %>" />
+          <input type="text" name="author" value="<%= book.authors %>" />
+          <input type="textarea" name="description" value="<%= book.description %>" />
+          <input type="text" name="isbn" value="<%= book.identifier %>" />
+          <input type="text" name="bookshelf" value="<%= book.bookshelf %>" />
+          <button type="submit">Save to Database</button>
+        </form>
+
+      </div>
+      <% }); %>
+
+    </ul>
+  </main>
+  <footer>
+    <%- include('../../layout/footer') %>
+  </footer>
+
+
+</body>
+
+</html>
