@@ -1,33 +1,44 @@
 <!-- form action"add" -->
-<!-- in the detail view pass in include('../layouts/form', {formAction: 'update', task:task})
+<!-- in the detail view pass in include('../layouts/form', {formAction: 'update', book:book})
 in the new search view it might be {formAction: 'create', task:task} -->
 
 
+<!-- <%- 'update' === formAction ? "Update Book" : "Add Book" %> -->
+<!-- ^this is a conditional that will be determined by includes -->
 
-<form action="/searches/save_id" method="post" id="<%= book.isbn %>">
+<form action="<%= 'update' === formAction ? `/books/${book.id}` : `searches/${book.id}` %>" method="post"
+  id="<%= book.isbn %>" class="hide">
+  <!-- hidden input -->
+  <input type="hidden" name="_method" value="<%- 'update' === formAction ? 'put' : 'post' %>">
+  <!-- end hidden input -->
+
   <fieldset>
     <input type="text" name="title" value="<%= book.title %>" placeholder="Title" />
+
     <input type="text" name="author" value="<%= book.author %>" placeholder="" />
+
     <input type="text" name="isbn" value="<%= book.isbn %>" />
+
+    <input type="text" name="image_url" value="<%= book.image_url %>" />
+
     <input type="textarea" name="description" value="<%= book.description %>" placeholder="Quick description of book" />
 
     <!-- bookshelf option -->
-    <input type="text" name="bookshelf" value="<%= book.bookshelf %>" />
-    <input type="text" name="image_url" value="<%= book.image_url %>" />
 
-    <p>Enter Bookshelf Here:</p>
-    <input type="text" name="bokoshelf" required>
+    <input type="text" name="bookshelf" value="<%= 'update' === formAction ? book.bookshelf : null %>" />
 
     <!-- end bookshelf option -->
 
 
     <!-- 'add book'||'save changes' option -->
 
-    <button id="showme-btn" type="submit">Add to Collection</button>
+    <button id="showme-btn" type="submit">
+      <%- 'update' === formAction ? "Save Changes" : "Add to Collection" %>
+    </button>
     <!-- end add/update button -->
   </fieldset>
 
 </form>
 
 
-<!-- we want to pass the object into the form, and we want form to be empty would be {book:''}, for prepopulated it would maybe be {book:book} -->
+<!-- we want to pass the object into the form, and if we want form to be empty would be {book:''}, for prepopulated it would be {book:book} -->

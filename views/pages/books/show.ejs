@@ -36,11 +36,11 @@
 
         <!-- end base book rendering -->
         <!-- begin button option -->
-        <button type="button" name="<%= book.isbn%>">Update Details</button>
+        <button type="button" name="<%= book.isbn%>"  class="showhidden">Update Details</button>
         <button type="submit">Delete Book</button>
         <!-- end buttons -->
         <!-- begin form -->
-        <%- include('form', {book:book})%>
+        <%- include('form', {formAction: 'update', book:book})%>
       </div>
       <% }) %>
     </ul>
