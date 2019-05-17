@@ -15,7 +15,10 @@ $(document).ready(function(){
   });
 });
 
-// this will make things display. on click it will remove the class from the following element
-$('.hide-n-seek').on('click', function(){
-  $(this).next().removeClass('hide');
+// this will make things display-- first hide...on click it will toggle display or hide
+$(document).ready(function(){
+  $('.hide').hide();
+  $('.showhidden').on('click', function(){
+    $(this).next().toggle();
+  });
 });

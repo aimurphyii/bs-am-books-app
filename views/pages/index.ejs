@@ -39,12 +39,12 @@
         <!-- end base book rendering -->
         <!-- begin option variation -->
 
-        <button><a href="/books/<%=book.id%>">View Details</a></button>
+        <button><a href="books/:id">Details</a></button>
 
         <!-- end option variation -->
         <!-- begin form templating -->
         
-        <%- include('books/form', {book:book})%>
+        <%- include('books/form', {formAction: 'update', book:book})%>
 
       </div>
       <% }); %>

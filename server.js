@@ -78,7 +78,7 @@ app.listen(PORT, () => console.log(`I'm listening to you on ${PORT}~`));
 
 
 // HELPER FNs
-// The Book Constructor - take API results and turns them into book objects we can render
+// Make books - take API results and turns them into book objects we can render
 function Book(info) {
   const placeholderImg = 'https://www.fillmurray.com/128/200';
 
@@ -112,7 +112,7 @@ function getBooks(request, response) {
 }
 
 
-// FUNCTION: Create Search Fn
+// FUNCTION: Search for new books query maker
 // --we are dynamically creating search based off of user choice, then getting the result, mapping over it to create books and rendering it on the show page
 function createSearch(request, response) {
   let url = 'https://www.googleapis.com/books/v1/volumes?q='
@@ -137,6 +137,7 @@ function newSearch(request, response) {
 // FUNCTION: Create Book FN
 // --destructuring to populate, like in react
 function createBook(request, response) {
+  
   let normalShelf = request.body.bookshelf.toUpperCase();
 
   let { title, author, isbn, image_url, description } = request.body;
@@ -176,6 +177,7 @@ function getBookshelves() {
 
   return client.query(SQL);
 }
+
 
 // ERROR HANDLER
 function errorHandler(error, response) {

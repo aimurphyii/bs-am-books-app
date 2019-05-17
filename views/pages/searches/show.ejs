@@ -42,12 +42,12 @@
         <!-- end book -->
         <!-- select button -->
 
-        <button class="select-btn">Choose Book</button>
+        <button class="showhidden">Choose Book</button>
 
         <!-- end button -->
         <!-- start form -->
         
-        <%- include('../books/form', {book:book})%>
+        <%- include('../books/form', {formAction: 'add', book:book})%>
 
       </div>
       <% }) %>
