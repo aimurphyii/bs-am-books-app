@@ -16,7 +16,7 @@
 
   <!-- main body starts here-->
   <main>
-    <!-- sub navigation -->
+    <!-- sub nav -->
     <ul class="subnav">
       <li>
         <i class="fas fa-search"></i>
@@ -27,13 +27,17 @@
         <a href="/">Shelf</a>
       </li>
     </ul>
-    <!-- end subnav -->
+    <!-- end sub nav -->
 
     <!-- Search form area -->
-    <form action="/searches" method="post">
+    <h1>Search by Title or Author</h1>
+    <div>
+
+    <form id="create-form" action="/searches" method="post">
       <section class="searchbar">
-        <input type="text" name="search" placeholder="favorite title or author" required>
-        <button type="submit">
+        <input type="text" name="search" placeholder="Enter a title or author" required>
+
+        <button class="small-btn" type="submit">
           <i class="fab fa-google"></i>
         </button>
       </section>
@@ -53,6 +57,7 @@
         </fieldset>
       </section>
     </form>
+  </div>
   </main>
   <footer>
     <%- include('../../layout/footer') %>

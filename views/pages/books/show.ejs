@@ -1,7 +1,5 @@
 <!-- books/show -->
-
-<!-- view details of one book from db -->
-
+<!-- view a single book in-depth from DB -->
 <!DOCTYPE html>
 <html>
 
@@ -10,34 +8,46 @@
 </head>
 
 <body>
-    <header>
-        <%- include('../../layout/header') %>
-    </header>
+  <header>
+    <%- include('../../layout/header') %>
+  </header>
   <main>
-      <ul class="subnav">
-          <li>
-            <i class="fas fa-search"></i>
-            <a href="/new">Search</a>
-          </li>
-          <li>
-              <i class="fas fa-book-open"></i>
-            <a href="/">Shelf</a>
-          </li>
-        </ul>
-      <ul>
-          <li>
-            <%- include('detail', {results: results}) %>
-          </li>
-        </ul>
+    <!-- subnav -->
+    <ul class="subnav">
+      <li>
+        <i class="fas fa-search"></i>
+        <a href="/new">Search</a>
+      </li>
+      <li>
+        <i class="fas fa-book-open"></i>
+        <a href="/">Shelf</a>
+      </li>
+    </ul>
+    <!-- end subnav -->
+
+    <!-- begin book template -->
+
+    <h1>Book Details</h1>
+    <ul>
+      <div>
+        <li>
+          <%- include('detail', {book:book}) %>
+        </li>
+
+        <!-- end base book rendering -->
+        <!-- begin button option -->
+        <button type="button" name="<%= book.isbn%>">Update Details</button>
+        <button type="submit">Delete Book</button>
+        <!-- end buttons -->
+        <!-- begin form -->
+        <%- include('form', {book:book})%>
+      </div>
+      <% }) %>
+    </ul>
   </main>
-<footer> 
+  <footer>
     <%- include('../../layout/footer') %>
-</footer>
+  </footer>
 </body>
 
 </html>
-
-
-
-
-

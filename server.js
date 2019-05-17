@@ -80,16 +80,16 @@ app.listen(PORT, () => console.log(`I'm listening to you on ${PORT}~`));
 // HELPER FNs
 // The Book Constructor - take API results and turns them into book objects we can render
 function Book(info) {
-  const placeholderImg = 'https://www.fillmurray.com/125/200';
+  const placeholderImg = 'https://www.fillmurray.com/128/200';
 
-  const regexHttps = '';
+  const regexHttps = /^(http:\/\/)/g;
 
   // we use the ternary to make sure there is info in the field
 
   this.title = info.title ? info.title : 'Sorry, title unavailable.';
   this.author = info.authors ? info.authors : 'Sorry, author(s) unavailable.';
   this.isbn = info.industryIdentifiers ? `${info.industryIdentifiers[0].type} - ${info.industryIdentifiers[0].identifier}` : 'Sorry, ISBN unavailable.';
-  this.image_url = info.imageLinks ? info.imageLinks.smallThumbnail : placeholderImg;
+  this.image_url = info.imageLinks ? info.imageLinks.smallThumbnail.replace('https://',regexHttps) : placeholderImg;
   this.description = info.description ? info.description : 'Sorry, description unavailable.';
   this.id = info.industryIdentifiers ? `${info.industryIdentifiers[0].identifier}` : '';
 }
@@ -105,7 +105,7 @@ function getBooks(request, response) {
       if (results.rows.rowCount === 0) {
         response.render('pages/searches/new');
       } else {
-        response.render('pages/index', { books: results.rows })
+        response.render('pages/index', {books: results.rows})
       }
     })
     .catch(err => errorHandler(err, response));
@@ -122,7 +122,7 @@ function createSearch(request, response) {
 
   superagent.get(url)
     .then(apiResponse => apiResponse.body.items.map(bookResult => new Book(bookResult.volumeInfo)))
-    .then(results => response.render('pages/searches/show', { results: results }))
+    .then(results => response.render('pages/searches/show', { books: results }))
     .catch(err => errorHandler(err, response));
 }
 
@@ -162,10 +162,12 @@ function getBook(request, response) {
     .then(shelves => {
       let SQL = 'SELECT * FROM books WHERE id=$1;';
       let values = [request.params.id];
+
       client.query(SQL, vaues)
         .then(result => response.render('pages/books/show', { book: result.rows[0], bookshelves: shelves.rows }))
-        .catch(err => errorHandler(err, response));
+        // .catch(err => errorHandler(err, response));
     })
+    .catch(err => errorHandler(err, response));
 }
 
 // this is to select a specific shelf

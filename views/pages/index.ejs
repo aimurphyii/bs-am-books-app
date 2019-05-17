@@ -1,5 +1,5 @@
-<!-- index.ejs -->
-<!-- getBooksFromDb -->
+<!-- index -->
+<!-- books from DB -->
 <!DOCTYPE html>
 <html>
 
@@ -12,7 +12,7 @@
     <%- include('../layout/header') %>
   </header>
   <main>
-
+    <!-- subnav -->
     <ul class="subnav">
       <li>
         <i class="fas fa-search"></i>
@@ -23,17 +23,29 @@
         <a href="/">Shelf</a>
       </li>
     </ul>
+    <!-- end subnav -->
+
+    <!-- begin book templating -->
 
     <h1><%= books.length %> Saved Books</h1>
-
     <ul>
       <% books.forEach(book => { %>
       <div>
+
         <li class="book-items" data-book-id="<%=book.id%>">
-          <%-include('books/detail',{book:book})%>
+          <%- include('books/detail',{book:book})%>
         </li>
 
-        <p class="details"><a href="/books/<%=book.id%>">View Details</a></p>
+        <!-- end base book rendering -->
+        <!-- begin option variation -->
+
+        <button><a href="/books/<%=book.id%>">View Details</a></button>
+
+        <!-- end option variation -->
+        <!-- begin form templating -->
+        
+        <%- include('books/form', {book:book})%>
+
       </div>
       <% }); %>
 
