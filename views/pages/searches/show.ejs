@@ -1,5 +1,4 @@
 <!-- pages/searches/show  -->
-
 <!-- New search for 10 books -->
 <!DOCTYPE html>
 <html>
@@ -13,8 +12,7 @@
     <%- include('../../layout/header') %>
   </header>
   <main>
-
-
+    <!-- subnav -->
     <ul class="subnav">
       <li>
         <i class="fas fa-search"></i>
@@ -25,33 +23,38 @@
         <a href="/">Shelf</a>
       </li>
     </ul>
+    <!-- end subnav -->
 
-    <h1><%= results.length %> Book Results</h1>
+    <!-- search results/books templating starts -->
 
+    <h1>Search Results</h1>
+    <h3><%= books.length %> Book Results</h3>
     <ul>
 
-      <% results.forEach(book => { %>
+
+      <% books.forEach(book=>{ %>
       <div>
-        <li class="img"><img src='<%= book.image_url %>' /></li>
-        <li class="title">
-          <h4><%= book.title %></h4>
+
+        <li data-book-id="<%= book.isbn %>">
+          <%- include('../books/detail', {book: book})%>
         </li>
-        <li class="author"><%= book.authors %></li>
-        <li class="description"><%= book.description %></li>
-        <button type="button" name="<%= book.identifier%>">Select this Book</button>
-        <form action="/searches/save_id" method="post" id="<%= book.identifier %>">
-          <input type="text" name="title" value="<%= book.title %>" />
-          <input type="text" name="author" value="<%= book.authors %>" />
-          <input type="textarea" name="description" value="<%= book.description %>" />
-          <input type="text" name="isbn" value="<%= book.identifier %>" />
-          <input type="text" name="bookshelf" value="<%= book.bookshelf %>" />
-          <button type="submit">Save to Database</button>
-        </form>
+
+        <!-- end book -->
+        <!-- select button -->
+
+        <button class="select-btn">Choose Book</button>
+
+        <!-- end button -->
+        <!-- start form -->
+        
+        <%- include('../books/form', {book:book})%>
 
       </div>
-      <% }); %>
-
+      <% }) %>
     </ul>
+
+    <!-- end of search results -->
+
   </main>
   <footer>
     <%- include('../../layout/footer') %>
