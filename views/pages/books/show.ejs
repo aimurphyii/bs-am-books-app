@@ -16,7 +16,7 @@
     <ul class="subnav">
       <li>
         <i class="fas fa-search"></i>
-        <a href="/new">Search</a>
+        <a href="searches/new">Search</a>
       </li>
       <li>
         <i class="fas fa-book-open"></i>
@@ -36,13 +36,15 @@
 
         <!-- end base book rendering -->
         <!-- begin button option -->
-        <button type="button" name="<%= book.isbn%>"  class="showhidden">Update Details</button>
         <button type="submit">Delete Book</button>
+        <button type="button" name="<%= book.isbn%>"  class="showhidden">Update Details</button>
+        
         <!-- end buttons -->
         <!-- begin form -->
         <%- include('form', {formAction: 'update', book:book})%>
       </div>
-      <% }) %>
+      <% }); %>
+     
     </ul>
   </main>
   <footer>
