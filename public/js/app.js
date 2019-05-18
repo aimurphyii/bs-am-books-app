@@ -19,6 +19,6 @@ $(document).ready(function(){
 $(document).ready(function(){
   $('.hide').hide();
   $('.showhidden').on('click', function(){
-    $(this).next().toggle();
+    $(this).next().slideToggle();
   });
 });

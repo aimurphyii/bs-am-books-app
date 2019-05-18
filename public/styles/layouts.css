@@ -40,6 +40,10 @@ input{
   margin:0px auto;
 }
 
+label{
+  display: block;
+}
+
 fieldset{
   color: #273043;
   font-size: 18px;

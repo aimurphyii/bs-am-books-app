@@ -6,7 +6,7 @@ in the new search view it might be {formAction: 'create', task:task} -->
 <!-- <%- 'update' === formAction ? "Update Book" : "Add Book" %> -->
 <!-- ^this is a conditional that will be determined by includes -->
 
-<form action="<%= 'update' === formAction ? `/books/${book.id}` : `searches/${book.id}` %>" method="post"
+<form action="<%= 'update' === formAction ? `/books/${book.id}` : `/searches/${book.id}` %>" method="post"
   id="<%= book.isbn %>" class="hide">
   <!-- hidden input -->
   <input type="hidden" name="_method" value="<%- 'update' === formAction ? 'put' : 'post' %>">
@@ -27,12 +27,30 @@ in the new search view it might be {formAction: 'create', task:task} -->
 
     <input type="text" name="bookshelf" value="<%= 'update' === formAction ? book.bookshelf : null %>" />
 
+
+    <label for="bookshelf">Place On a Bookshelf:</label>
+    <input list="book-genres" id="bookshelf" name="bookshelf"  />
+
+    <datalist id="book-genres">
+      <option value="Fantasy"></option>
+      <option value="Science Fiction"></option>
+      <option value="Westerns"></option>
+      <option value="Romance"></option>
+      <option value="Thriller"></option>
+      <option value="Mystery"></option>
+      <option value="Detective Story"></option>
+      <option value="Dystopia"></option>
+      <option value="General"></option>
+    </datalist>
+
+    <!-- <button type="submit">Save to Database</button> -->
+
     <!-- end bookshelf option -->
 
 
     <!-- 'add book'||'save changes' option -->
 
-    <button id="showme-btn" type="submit">
+    <button type="submit">
       <%- 'update' === formAction ? "Save Changes" : "Add to Collection" %>
     </button>
     <!-- end add/update button -->

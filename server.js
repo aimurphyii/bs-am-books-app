@@ -65,10 +65,13 @@ app.post('/searches', createSearch);
 // --the results of a serach for us to click on
 app.get('/searches/new', newSearch);
 // --new search for books
-app.post('/books', createBook);
-// --creating a book in our DB
+// app.post('/books', createBook);
+// // --creating a book in our DB
 app.get('/books/:id', getBook);
 // --a specific book, looking for books/(an info-param)
+
+app.post('/searches/:id', saveBookToDB); // redirect to home '/' page
+app.put('/books/:id', updateBook);
 
 app.get('*', (request, response) => response.status(404).send('Looks like we made a wrong turn at Albuquerque.'));
 // --catch all for accidental wrong path!
@@ -134,49 +137,95 @@ function newSearch(request, response) {
 }
 
 
-// FUNCTION: Create Book FN
-// --destructuring to populate, like in react
-function createBook(request, response) {
+// // FUNCTION: Create Book FN
+// // --destructuring to populate, like in react
+// function createBook(request, response) {
   
-  let normalShelf = request.body.bookshelf.toUpperCase();
+//   let normalShelf = request.body.bookshelf.toUpperCase();
 
-  let { title, author, isbn, image_url, description } = request.body;
-  let SQL = 'INSERT INTO books(title, author, isbn, image_url, description, bookshelf) VALUES($1,$2,$3,$4,$5,$6);';
-  let values = [title, author, isbn, image_url, description, normalShelf];
+//   let { title, author, isbn, image_url, description } = request.body;
+//   let SQL = 'INSERT INTO books(title, author, isbn, image_url, description, bookshelf) VALUES($1,$2,$3,$4,$5,$6);';
+//   let values = [title, author, isbn, image_url, description, normalShelf];
+
+//   return client.query(SQL, values)
+//     .then(() => {
+//       SQL = 'SELECT * FROM books WHERE isbn=$1;';
+//       values = [request.body.isbn];
+//       return client.query(SQL, values)
+//         .then(result => response.redirect(`/books/${result.rows[0].id}`))
+//         .catch(errorHandler);
+//     })
+//     .catch(err => errorHandler(err, response));
+// }
+
+
+// // FUNCTION Get BOOK, just ONE
+// // --pull up a single book
+// function getBook(request, response) {
+//   // getBookshelves()
+//   //   .then(shelves => {
+//     console.log('❤️BOOK ID = ', request.params.id);
+//       let SQL = 'SELECT * FROM books WHERE id=$1;';
+//       let values = [request.params.id];
+
+//       return client.query(SQL, values)
+//         .then(result => {
+//           return response.render('pages/books/show', { book: result.rows[0], bookshelves: shelves.rows });
+//         })
+//         // .catch(err => errorHandler(err, response));
+//     // })
+//     .catch(err => errorHandler(err, response));
+// }
+
+
+function getBook(request, response) {
+
+  console.log('❤️BOOK ID = ', request.params.id);
+
+  let SQL = 'SELECT * FROM books WHERE id=$1;';
+  let values = [request.params.id];
 
   return client.query(SQL, values)
-    .then(() => {
-      SQL = 'SELECT * FROM books WHERE isbn=$1;';
-      values = [request.body.isbn];
-      return client.query(SQL, values)
-        .then(result => response.redirect(`/books/${result.rows[0].id}`))
-        .catch(errorHandler);
+    .then(results => {
+      console.log('line 70', results.rows[0]);
+      return response.render('pages/books/show', { book: results.rows[0] });
     })
     .catch(err => errorHandler(err, response));
 }
 
 
-// FUNCTION Get BOOK, just ONE
-// --pull up a single book
-function getBook(request, response) {
-  getBookshelves()
-    .then(shelves => {
-      let SQL = 'SELECT * FROM books WHERE id=$1;';
-      let values = [request.params.id];
+function saveBookToDB(request, response) {
 
-      client.query(SQL, vaues)
-        .then(result => response.render('pages/books/show', { book: result.rows[0], bookshelves: shelves.rows }))
-        // .catch(err => errorHandler(err, response));
-    })
+  let { title, author, isbn, image_url, description, bookshelf} = request.body;
+
+  let SQL = 'INSERT INTO books(title, author, isbn, image_url, description, bookshelf) VALUES ($1, $2, $3, $4, $5, $6);';
+  let values = [title, author, isbn, image_url, description, bookshelf];
+
+  return client.query(SQL, values)
+    .then(response.redirect('/'))
     .catch(err => errorHandler(err, response));
 }
 
-// this is to select a specific shelf
-function getBookshelves() {
-  let SQL = 'SELECT DISTINCT bookshelf FROM books ORDER BY bookshelf;';
+function updateBook(request, response) {
+  // destructure variables
+  let { title, author, isbn, image_url, description, bookshelf} = request.body;
+  // need SQL to update the specific task that we were on
+  let SQL = `UPDATE books SET title=$1, author=$2, isbn=$3, image_url=$4, description=$5 bookshelf=$6 WHERE id=$7;`;
+  // use request.params.task_id === whatever task we were on
+  let values = [title, author, isbn, image_url, description, bookshelf, request.params.id];
 
-  return client.query(SQL);
+  client.query(SQL, values)
+    .then(response.redirect(`/books/${request.params.id}`))  //change tasks path ?????????
+    .catch(err => errorHandler(err, response));
 }
+
+
+// // this is to select a specific shelf
+// function getBookshelves() {
+//   let SQL = 'SELECT DISTINCT bookshelf FROM books ORDER BY bookshelf;';
+
+//   return client.query(SQL);
+// }
 
 
 // ERROR HANDLER

@@ -1,4 +1,5 @@
 <!-- pages/searches/show  -->
+
 <!-- New search for 10 books -->
 <!DOCTYPE html>
 <html>
@@ -12,7 +13,8 @@
     <%- include('../../layout/header') %>
   </header>
   <main>
-    <!-- subnav -->
+
+
     <ul class="subnav">
       <li>
         <i class="fas fa-search"></i>
@@ -23,38 +25,27 @@
         <a href="/">Shelf</a>
       </li>
     </ul>
-    <!-- end subnav -->
-
-    <!-- search results/books templating starts -->
-
-    <h1>Search Results</h1>
-    <h3><%= books.length %> Book Results</h3>
     <ul>
-
-
-      <% books.forEach(book=>{ %>
+      <% books.forEach(book => { %>
       <div>
-
-        <li data-book-id="<%= book.isbn %>">
-          <%- include('../books/detail', {book: book})%>
+        <li>
+          <%- include('../books/detail', {book:book}) %>
         </li>
 
-        <!-- end book -->
-        <!-- select button -->
+        <!-- end base book rendering -->
+        <!-- begin button option -->
+        <button type="submit">Delete Book</button>
+        <button type="button" name="<%= books.isbn%>" class="showhidden">Update Details</button>
 
-        <button class="showhidden">Choose Book</button>
-
-        <!-- end button -->
-        <!-- start form -->
-        
-        <%- include('../books/form', {formAction: 'add', book:book})%>
-
+        <!-- end buttons -->
+        <!-- begin form -->
+        <%- include('../books/form', {formAction: 'update', book:book})%>
       </div>
-      <% }) %>
+      <% }); %>
+
+
+
     </ul>
-
-    <!-- end of search results -->
-
   </main>
   <footer>
     <%- include('../../layout/footer') %>
